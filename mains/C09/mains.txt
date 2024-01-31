@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+int main() 
+{
+    char str[] = "This,is,a,test,string";
+    char charset[] = ",";
+
+    char **result = ft_split(str, charset);
+
+    int i = 0;
+    while (result[i] != NULL) {
+        printf("%s\n", result[i]);
+		free(result[i]);
+        i++;
+    }
+    free(result);
+    return (0);
+}
