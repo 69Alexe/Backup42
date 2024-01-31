@@ -24,8 +24,7 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-
-
+Hi 
 Ex Final
 
 int	ft_strlen(char *src)
