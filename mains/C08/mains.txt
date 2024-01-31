@@ -1,0 +1,103 @@
+#include <stdio.h>
+
+int main(int argc, char *argv[])
+{
+    if (argc < 2)
+    {
+        printf("Usage: %s <string1> <string2> ... <stringN>\n", argv[0]);
+        return 1;
+    }
+
+    t_stock_str *result = ft_strs_to_tab(argc - 1, &argv[1]);
+
+    printf("Index\tSize\tString\tCopy\n");
+    for (int i = 0; result[i].str != 0; ++i)
+    {
+        printf("%d\t%s\n", i, result[i].str);
+    }
+
+    for (int i = 0; result[i].str != 0; ++i)
+    {
+        free(result[i].copy);
+    }
+    free(result);
+
+    return 0;
+}
+
+
+Ex Final
+
+int	ft_strlen(char *src)
+{
+	int	i;
+
+	i = -1;
+	while (src[i++] != '\0')
+		;
+	return (i);
+}
+
+unsigned int	ft_dupstr(char **dest, char *src)
+{
+	char	*rt;
+	unsigned int	len;
+	unsigned int	i;
+	
+	len = ft_strlen(src);
+	rt = (char *) malloc((len + 1) * sizeof(char));
+	i = 0;
+	while (i < len)
+	{
+		rt[i] = src[i];
+		i ++;
+	}
+	rt[i] = 0;
+	*dest = rt;
+	return (len);
+}
+
+struct s_stock_str *ft_strs_to_tab(int ac, char **av)
+{
+	int	i;
+	t_stock_str *rt;
+
+	if (ac < 0)
+		return (NULL);
+	rt = (t_stock_str *) malloc((ac +1) * sizeof(t_stock_str));
+	i = 0;
+	while (i < ac)
+	{
+		rt[i].str = av[i];
+		rt[i].size = (int) ft_dupstr(&rt[i].copy, rt[i].str);
+		i++;
+	}
+	rt[i].str = 0;
+	return (rt);
+}
+
+int ft_strlen(char *src);
+unsigned int ft_dupstr(char **dest, char *src);
+struct s_stock_str *ft_strs_to_tab(int ac, char **av);
+void ft_show_tab(struct s_stock_str *par);
+
+int main(int argc, char *argv[])
+{
+    if (argc < 2)
+    {
+        printf("Usage: %s <string1> <string2> ... <stringN>\n", argv[0]);
+        return 1;
+    }
+
+    struct s_stock_str *result = ft_strs_to_tab(argc - 1, &argv[1]);
+
+    ft_show_tab(result);
+
+    for (int i = 0; result[i].str != 0; ++i)
+    {
+        free(result[i].copy);
+    }
+    free(result);
+
+    return 0;
+}
